@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand colors */
+  --color-brand-50: #f0f0ff;
+  --color-brand-100: #e0e0ff;
+  --color-brand-200: #c7c7ff;
+  --color-brand-300: #a5a5ff;
+  --color-brand-400: #8080ff;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection { background: #6366f1; color: white; }
+
+/* ── Focus ─────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Typography for prose content ─────────────────────────── */
+.prose {
+  color: #18181b;
+  max-width: 72ch;
+  line-height: 1.8;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #09090b;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+.prose h2 { font-size: 1.5rem; }
+.prose h3 { font-size: 1.25rem; }
+
+.prose p {
+  margin-bottom: 1.25em;
+  color: #3f3f46;
+}
+
+.prose a {
+  color: #6366f1;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover { color: #4f46e5; }
+
+.prose ul, .prose ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.prose li { margin-bottom: 0.4em; color: #3f3f46; }
+
+.prose blockquote {
+  border-left: 4px solid #6366f1;
+  background: #f5f5ff;
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5em 0;
+  font-style: italic;
+  color: #4f46e5;
+}
+
+.prose code {
+  background: #f4f4f5;
+  color: #6366f1;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: ui-monospace, monospace;
+}
+
+.prose pre {
+  background: #18181b;
+  color: #e4e4e7;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.prose pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.prose img {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+}
+
+.prose strong { color: #09090b; font-weight: 600; }
+
+.dark .prose { color: #d4d4d8; }
+.dark .prose h1, .dark .prose h2, .dark .prose h3, .dark .prose h4 { color: #fafafa; }
+.dark .prose p, .dark .prose li { color: #a1a1aa; }
+.dark .prose blockquote { background: #1e1b4b; color: #a5b4fc; }
+.dark .prose code { background: #27272a; color: #a5b4fc; }
+
+/* ── Gradient text ─────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glass card ────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.dark .glass {
+  background: rgba(24, 24, 27, 0.7);
+  border: 1px solid rgba(63, 63, 70, 0.5);
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f4f4f5 25%, #e4e4e7 50%, #f4f4f5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* ── Reading progress ──────────────────────────────────────── */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #d946ef);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
